@@ -1,45 +1,58 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: [],
+			contact: null
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContacts: async () => {
+				try {
+					const response = await fetch("https://playground.4geeks.com/contact/agendas");
+					const data = await response.json();
+					setStore({ contacts: data });
+				} catch (error) {
+					console.error("Error fetching contacts:", error);
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			getContact: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/${contactName})`);
+					const data = await response.json();
+					setStore({ contact: data });
+				} catch (error) {
+					console.error("Error fetching contact:", error);
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			createContact: async (contact) => {
+				try {
+					await fetch(`https://playground.4geeks.com/contact/agendas/${contactName})`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(contact)
+					});
+					getActions().getContacts();
+				} catch (error) {
+					console.error("Error creating contact:", error);
+				}
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
+			deleteContact: async (id) => {
+				try {
+					await fetch(`https://playground.4geeks.com/contact/agendas/${contactName}`, {
+						method: "DELETE"
+					});
+					getActions().getContacts();
+				} catch (error) {
+					console.error("Error deleting contact:", error);
+				}
 			}
 		}
 	};
 };
 
 export default getState;
+

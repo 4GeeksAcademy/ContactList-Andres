@@ -10,6 +10,8 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { ContactForm } from "./component/ContactForm.jsx";
+import { ContactList } from "./component/ContactList.jsx";
+import { ContactCard } from "./component/ContactCard.jsx"
 
 //create your first component
 const Layout = () => {
@@ -28,6 +30,8 @@ const Layout = () => {
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 						<Route path="/ContactForm" element={<ContactForm/>} />
+						<Route path="/ContactList" element={<ContactList/>} />
+						<Route path="/ContactCard" element={<ContactCard/>} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>
