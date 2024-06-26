@@ -13,10 +13,10 @@ export const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newContact = {
-            contactName: name,
-            contactEmail: email,
-            contactPhone: phone,
-            contactAddress: address
+            name: name,
+            email: email,
+            phone: phone,
+            address: address
         };
         actions.createContact(newContact);
         navigate("/ContactList");
@@ -75,7 +75,7 @@ export const ContactForm = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary" onChange={handleSubmit}>Save Contact</button>
+                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Save Contact</button>
                 <button type="button" className="btn btn-secondary ml-2" onClick={() => navigate("/ContactList")}>Back to Contact List</button>
             </form>
         </div>

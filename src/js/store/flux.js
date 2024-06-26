@@ -1,7 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: [],
+			contacts: [        {
+				"name": "name",
+				"phone": "phone",
+				"email": "email",
+				"address": "address",
+			},],
 			contact: null
 		},
 		actions: {
@@ -17,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getContact: async (id) => {
 				try {
-					const response = await fetch(`https://playground.4geeks.com/contact/agendas/${contactName})`);
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/${id})`);
 					const data = await response.json();
 					setStore({ contact: data });
 				} catch (error) {
@@ -25,14 +30,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			createContact: async (contact) => {
+			createContact: async (id) => {
 				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/${contactName})`, {
+					await fetch(`https://playground.4geeks.com/contact/agendas/${id})`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(contact)
+						body: JSON.stringify(slug)
 					});
 					getActions().getContacts();
 				} catch (error) {
@@ -42,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			deleteContact: async (id) => {
 				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/${contactName}`, {
+					await fetch(`https://playground.4geeks.com/contact/agendas/${id}`, {
 						method: "DELETE"
 					});
 					getActions().getContacts();
