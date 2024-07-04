@@ -1,3 +1,5 @@
+import { ids } from "webpack";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -30,14 +32,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			createContact: async (id) => {
+			createContact: async (contact) => {
 				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/${id})`, {
+					await fetch(`https://playground.4geeks.com/contact/agendas/${contact})`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(slug)
+						body: JSON.stringify(contact)
 					});
 					getActions().getContacts();
 				} catch (error) {

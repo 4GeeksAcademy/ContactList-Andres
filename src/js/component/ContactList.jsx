@@ -18,9 +18,9 @@ export const ContactList = () => {
                 <button className="btn btn-success mb-4" onClick={() => navigate("/ContactForm")}>Create New Contact</button>
             </div>
             {store.contacts.length > 0 ? (
-                store.contacts.map(newContact => (
-                    <div className="d-flex justify-content-center" key={newContact.id}>
-                        <ContactCard contact={newContact} />
+                store.contacts.map(contact => (
+                    <div className="d-flex justify-content-center" key={contact.id}>
+                        <ContactCard contact={contact} />
                     </div>
                 ))
             ) : (
@@ -29,3 +29,4 @@ export const ContactList = () => {
         </div>
     );
 };
+
