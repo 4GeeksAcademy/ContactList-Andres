@@ -18,9 +18,10 @@ export const ContactList = () => {
                 <button className="btn btn-success mb-4" onClick={() => navigate("/ContactForm")}>Create New Contact</button>
             </div>
             {store.contacts.length > 0 ? (
-                store.contacts.map(contact => (
-                    <div className="d-flex justify-content-center" key={contact.id}>
-                        <ContactCard contact={contact} />
+                store.contacts.map((contact, index) => (
+                    <div className="d-flex justify-content-center">
+                        <p> key={index}Contact={contact.slug}</p>
+                        <button className="btn btn-danger ml-2" onClick={() => actions.deleteContact(contact.index)}>Delete</button>
                     </div>
                 ))
             ) : (

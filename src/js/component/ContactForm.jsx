@@ -25,7 +25,7 @@ export const ContactForm = () => {
     return (
         <div className="container mt-5">
             <h1 className="text-center">Add New Contact</h1>
-            <form className="container m-5">
+            <form className="container m-5" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="dataName" className="form-label">Contact Name</label>
                     <input
