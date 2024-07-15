@@ -1,5 +1,3 @@
-import { ids } from "webpack";
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -31,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			createContact: async (newContact) => {
 				console.log(newContact)
 				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts)`, {
+					await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -44,17 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			deleteContact: async (index) => {
-				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/${index}`, {
-						method: "DELETE"
-					});
-					getActions().getContacts();
-				} catch (error) {
-					console.error("Error deleting contact:", error);
-				}
-			},
-
 			getContactsAgenda: async () => {
 				try {
 					const response = await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts`);
@@ -63,10 +50,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error fetching contact:", error);
 				}
+			},
+
+			deleteContact: async (id) => {
+				console.log(id)
+				try {
+					await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts/${id}`, {
+						method: "DELETE"
+					});
+					getActions().getContactsAgenda();
+				} catch (error) {
+					console.error("Error deleting contact:", error);
+				}
+			},
+
+			editContactData: async (id, updatedContact) => {
+				try {
+					await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedContact)
+					});
+					getActions().getContactsAgenda();
+				} catch (error) {
+					console.error("Error editing contact:", error);
+				}
 			}
 		}
 	};
 };
 
 export default getState;
+
 
