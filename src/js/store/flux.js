@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts: [],
-			contact: []
+			contact: [],
+			ContactsAgenda: []
 		},
 		actions: {
 			getContacts: async () => {
@@ -27,16 +28,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			createContact: async (slug) => {
+			createContact: async (newContact) => {
+				console.log(newContact)
 				try {
-					await fetch(`https://playground.4geeks.com/contact/agendas/${slug})`, {
+					await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts)`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(slug)
+						body: JSON.stringify(newContact)
 					});
-					getActions().getContacts();
+					getActions().getContactsAgenda();
 				} catch (error) {
 					console.error("Error creating contact:", error);
 				}
@@ -50,6 +52,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					getActions().getContacts();
 				} catch (error) {
 					console.error("Error deleting contact:", error);
+				}
+			},
+
+			getContactsAgenda: async () => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/pruebaAndres/contacts`);
+					const data = await response.json();
+					setStore({ ContactsAgenda: data.contacts });
+				} catch (error) {
+					console.error("Error fetching contact:", error);
 				}
 			}
 		}

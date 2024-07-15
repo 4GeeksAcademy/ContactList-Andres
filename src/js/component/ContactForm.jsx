@@ -19,9 +19,8 @@ export const ContactForm = () => {
             address: address
         };
         actions.createContact(newContact);
-        navigate("/ContactList");
+        navigate("/ContactCard");
     };
-
     return (
         <div className="container mt-5">
             <h1 className="text-center">Add New Contact</h1>
@@ -76,7 +75,7 @@ export const ContactForm = () => {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary" onSubmit={handleSubmit}>Save Contact</button>
-                <button type="button" className="btn btn-secondary ml-2" onClick={() => navigate("/ContactList")}>Back to Contact List</button>
+                <button type="button" className="btn btn-secondary ml-2" onClick={() => navigate("/ContactCard")}>Back to Contact List</button>
             </form>
         </div>
     );
